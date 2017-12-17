@@ -29,12 +29,15 @@ export class SearchPage {
     ) {}
 
     ngOnInit() {
+        // console.log(this.searchElementRef.nativeElement)
+        // console.log(this.searchElementRef.nativeElement.getElementsByTagName('input'));
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(
             () => {
-                let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, { types: ["address"] });
-
-                autocomplete.addListener("place_changed", () => {
+                let typedLocation = this.searchElementRef.nativeElement.getElementsByTagName('input').search;
+                console.log(typedLocation )
+                let autocomplete = new google.maps.places.Autocomplete(typedLocation , { types: ["address"] });
+                autocomplete.addListener('place_changed', () => {
                     this.ngZone.run(() => {
                         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
                         console.log("place", place);

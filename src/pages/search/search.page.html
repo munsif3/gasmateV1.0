@@ -24,13 +24,7 @@
             <ion-label floating>Type in your location</ion-label>
             <ion-input [(ngModel)]="searchbar" name="search" type="text" autocorrect="off" autocapitalize="off" spellcheck="off" [formControl]="searchControl" #search ></ion-input>             
         </ion-item>
-
-
-        <!-- <div class="form-group">
-            <input autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-        </div> -->
-        <!-- [(ngModel)]="searchbar"  autocomplete="off" -->
-
+        
         <ion-item padding-bottom>
             <ion-label>Select the Fuel Type</ion-label>
             <ion-select interface="popover" [(ngModel)]="fuelType" name="fuelType" class="select select-md ng-pristine ng-valid ng-touched">

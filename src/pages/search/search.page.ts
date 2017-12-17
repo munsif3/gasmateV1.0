@@ -6,7 +6,6 @@ import {} from "@types/googlemaps";
 
 import { ResultsPage } from "../pages";
 
-declare var geolocation: any;
 declare var google: any;
 
 @Component({
@@ -15,7 +14,7 @@ declare var google: any;
 })
 export class SearchPage {
     public searchControl: FormControl;
-    public searchbar: String = "0";
+    searchbar: String;
 
     @ViewChild("search", { read: ElementRef })
     public searchElementRef: ElementRef;
@@ -30,21 +29,7 @@ export class SearchPage {
     ngOnInit() {
         this.setCurrentPosition();
         this.searchControl = new FormControl();
-        this.mapsAPILoader.load().then(() => {
-            let typedLocation = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
-            let autocomplete = new google.maps.places.Autocomplete(typedLocation, { types: ["address"] });
-            autocomplete.addListener("place_changed", () => {
-                this.ngZone.run(() => {
-                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                    console.log("place", place);
-                    if ( place.geometry === undefined || place.geometry === null ) {
-                        return;
-                    } else {
-                        console.log("Error Fetching Suggestion");
-                    }
-                });
-            });
-        });
+        this.allowDynamicSearch();
     }
 
     setCurrentPosition() {
@@ -65,6 +50,24 @@ export class SearchPage {
                 });
             });
         }
+    }
+
+    allowDynamicSearch() {
+        this.mapsAPILoader.load().then(() => {
+            let typedLocation = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
+            let autocomplete = new google.maps.places.Autocomplete(typedLocation, { types: ["address"] });
+            autocomplete.addListener("place_changed", () => {
+                this.ngZone.run(() => {
+                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                    console.log("place", place);
+                    if ( place.geometry === undefined || place.geometry === null ) {
+                        return;
+                    } else {
+                        console.log("Error Fetching Suggestion");
+                    }
+                });
+            });
+        });
     }
 
     showResultsPage(fuelType, radius) {

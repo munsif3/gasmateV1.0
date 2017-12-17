@@ -22,7 +22,6 @@ export class DirectionPage {
             zoom: 13,
             markerLabel: this.navParams.data.address
         };
-        window.location = `geo:${this.map.lat},${this.map.lng};u=35`;
     }
 
     getDirections(){

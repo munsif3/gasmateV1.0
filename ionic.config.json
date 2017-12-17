@@ -1,0 +1,8 @@
+{
+  "name": "gasmate",
+  "app_id": "f0f8cf34",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

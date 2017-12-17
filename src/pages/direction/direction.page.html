@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="yelloshade">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>View Direction</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="map-page">
+    <agm-map id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom">
+        <agm-marker [latitude]="map.lat" [longitude]="map.lng"></agm-marker>
+        <agm-info-window>
+            <strong>{{map.markerLabel}}</strong>
+        </agm-info-window>
+    </agm-map>
+
+    <ion-fab left="" bottom="" (click)="getDirections()">
+        <button color="accentshade" ion-fab="" class="fab fab-md fab-md-danger">
+            <ion-icon name="navigate" role="img" class="icon icon-md ion-md-add"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

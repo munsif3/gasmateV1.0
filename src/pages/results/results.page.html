@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="yelloshade">
+        <ion-title>Search Results</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="!sheds">
+        <ion-card-header>
+            No Filling Stations Found
+        </ion-card-header>
+        <ion-card-content>
+            <p>Please go back and use another filter</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-list *ngIf="sheds">
+        <ion-card class="rescard" *ngFor="let shed of sheds" (click)="shedSelected($event, shed)">
+            <ion-list>
+                <img class="resimg" [src]="shed.image_url" />
+                <ion-card-content>
+                    <ion-card-title>{{shed.name}}</ion-card-title>
+                    <p>{{shed.address}}</p>
+                </ion-card-content>
+            </ion-list>
+        </ion-card>
+        <br>
+    </ion-list>
+</ion-content>

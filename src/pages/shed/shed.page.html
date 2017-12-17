@@ -1,0 +1,54 @@
+<ion-header class="shed-nav">
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div style="position: relative;">
+        <ion-img class="title-img" src="{{selectedShed.image_url}}"></ion-img>
+        <ion-title class="shed-name">{{selectedShed.name}}</ion-title>
+    </div>
+
+    <div padding>
+        <!-- <ion-badge item-end color="secondary">SUCCESS</ion-badge> -->
+        <ion-label stacked>Address : </ion-label>
+        <ion-item no-lines>
+            <ion-label>{{selectedShed.address}}</ion-label>
+        </ion-item>
+
+        <ion-label stacked>Available Types : </ion-label>
+        <ion-item no-lines>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        Fuel Type
+                    </ion-col>
+                    <ion-col col-6>
+                        Available Amount
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid *ngFor="let type of fuelTypes">
+                <ion-row>
+                    <ion-col col-6>
+                        {{type.name}}
+                    </ion-col>
+                    <ion-col col-6>
+                        {{type.amount}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-label stacked>Distance to Station : </ion-label>
+        <ion-item no-lines>
+            <ion-label>{{selectedShed.distance}} km</ion-label>
+        </ion-item>
+
+        <button outline ion-button medium block round color="accentshade" (click)="getDirections()">
+            <ion-icon name="navigate"></ion-icon>&nbsp;&nbsp;Get Directions
+        </button>
+    </div>
+</ion-content>

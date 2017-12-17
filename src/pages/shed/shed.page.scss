@@ -1,0 +1,33 @@
+ion-header.shed-nav {
+    .toolbar {
+        position: absolute;
+        .toolbar-background {
+            background: transparent;
+        }
+        .toolbar-title {
+            color: black;
+        }
+    }
+}
+
+.header-md::after {
+    display: none;
+}
+
+.title-img {
+    object-fit: cover;
+    width: 370px;
+    height: 200px;
+}
+
+.shed-name.toolbar-title-md {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    color: #ffffff;
+}
+
+// .types-title {
+//     position: absolute;
+//     left: 20px;
+// }

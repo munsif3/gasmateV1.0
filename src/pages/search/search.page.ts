@@ -1,5 +1,5 @@
 import { Component, NgZone, ElementRef, ViewChild } from "@angular/core";
-import { NavController, Platform } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { MapsAPILoader } from "@agm/core";
 import { FormControl } from "@angular/forms";
 import {} from "@types/googlemaps";
@@ -16,19 +16,16 @@ export class SearchPage {
 
     public searchControl: FormControl;
     public searchBar: String = "";
-    @ViewChild("search", { read: ElementRef })
-    public searchElementRef: ElementRef;
+    @ViewChild("search", { read: ElementRef }) public searchElementRef: ElementRef;
 
     constructor (
         public navCtrl: NavController,
         private ngZone: NgZone,
-        private mapsAPILoader: MapsAPILoader,
-        private platform: Platform
+        private mapsAPILoader: MapsAPILoader
     ) { }
 
     ngOnInit() {
         this.searchControl = new FormControl();
-        // this.allowDynamicSearch();
         this.setCurrentPosition();
         this.mapsAPILoader.load().then(() => {
             let typedLocation = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
@@ -54,13 +51,10 @@ export class SearchPage {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                // let willType = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode({ location: pos },  (results, status) => {
                     if (status == "OK") {
                         this.searchBar = results[0].formatted_address;
-                        // console.log("Fetched Location before:", results[0].formatted_address);
-                        // willType.value = results[0].formatted_address;
                     } else {
                         console.log("Error Fetching User Location");
                     }

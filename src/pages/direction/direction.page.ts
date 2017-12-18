@@ -1,6 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
-// import { MapsAPILoader } from "@agm/core";
 
 declare var window: any;
 
@@ -10,47 +9,50 @@ declare var window: any;
 })
 export class DirectionPage {
 
-    map: any = {};
+    stationLocation: any = {};
+    userLocation: any = {};
+    map: any;
+
+    @ViewChild('map', { read: ElementRef }) mapElement: ElementRef;
+    @ViewChild("directionsPanel", { read: ElementRef }) directionsPanel: ElementRef;
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams
-        // ,public mapsApi: GoogleMapsAPIWrapper
-    ) {}
+    ) { }
 
-    ionViewWillEnter() {      
-        this.map = {
+    ionViewWillEnter() {
+        this.stationLocation = {
             lat: this.navParams.data.location.latitude,
-            lng: this.navParams.data.location.longitude,
+            lng: this.navParams.data.location.longitude            
+        };
+
+        let mapOptions = {
+            center: this.stationLocation,
             zoom: 13,
-            markerLabel: this.navParams.data.address
-        };        
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     }
 
-    // ngOnInit(){
-    //     this.mapsApi.getNativeMap().then(map => {
-    //         var directionsService = new google.maps.DirectionsService;
-    //         var directionsDisplay = new google.maps.DirectionsRenderer;
-    //         directionsDisplay.setMap(map);
-    //         var route = {
-    //             origin: {lat: this.origin.latitude, lng: this.origin.longitude},
-    //             destination: {lat: this.destination.latitude, lng: this.destination.longitude},
-    //             waypoints: [],
-    //             optimizeWaypoints: true,
-    //             travelMode: 'DRIVING'
-    //         };
-    //         directionsService.route(route, function(response, status) {
-    //             if (status === 'OK') {
-    //             directionsDisplay.setDirections(response);
-    //             } else {
-    //             window.alert('Directions request failed due to ' + status);
-    //             }
-    //         });
-    //   });
-    // }
+    startNavigating() {
+        let directionsService = new google.maps.DirectionsService();
+        let directionsDisplay = new google.maps.DirectionsRenderer();
 
-    getDirections(){
-        console.log( `geo:${this.map.lat},${this.map.lng};u=35`)
-        window.location = `geo:${this.map.lat},${this.map.lng};u=35`;
+        directionsDisplay.setMap(this.map);
+        directionsDisplay.setPanel(this.directionsPanel.nativeElement);
+
+        directionsService.route({
+                origin: "boc merchant tower",
+                destination: this.stationLocation,
+                travelMode: google.maps.TravelMode["DRIVING"]
+            }, (res, status) => {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(res);
+                } else {
+                    console.warn(status);
+                }
+            }
+        );
     }
 }

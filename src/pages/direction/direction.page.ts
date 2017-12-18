@@ -11,15 +11,15 @@ export class DirectionPage {
     userLocation: any = {};
     map: any;
 
-    @ViewChild('map', { read: ElementRef }) mapElement: ElementRef;
-    @ViewChild("directionsPanel", { read: ElementRef }) directionsPanel: ElementRef;
+    @ViewChild('map') mapElement: ElementRef;
+    @ViewChild("directionsPanel") directionsPanel: ElementRef;
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams
     ) { }
 
-    ionViewWillEnter() {
+    ngOnInit() {
         this.stationLocation = {
             lat: this.navParams.data.location.latitude,
             lng: this.navParams.data.location.longitude            
@@ -31,6 +31,7 @@ export class DirectionPage {
             mapTypeId: google.maps.MapTypeId.ROADMAP
           }
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        this.startNavigating();
     }
 
     startNavigating() {

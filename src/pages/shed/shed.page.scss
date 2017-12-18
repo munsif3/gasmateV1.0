@@ -14,6 +14,15 @@ ion-header.shed-nav {
     display: none;
 }
 
+.shed-details ion-label{
+    font-size: 1.5rem;
+}
+
+.shed-details ion-item ion-label {
+    font-size: 1.7rem;
+    
+}
+
 .title-img-name {
     position: relative;
 }
@@ -25,14 +34,22 @@ ion-header.shed-nav {
 }
 
 .shed-name div {
-    // padding-right: 130px;
     padding-bottom: 60px;
     font-size: 4rem;
-    color: #ffff;
-    -webkit-text-stroke: 0.1px black;
+    color: white;
 }
 
-// .types-title {
-//     position: absolute;
-//     left: 20px;
-// }
+.fuel-grid-head {
+    font-size: 1.45rem;
+}
+
+.fuel-grid-data {
+    font-size: 1.35rem;
+}
+
+.fab-navigate {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 15px;
+}

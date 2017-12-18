@@ -8,30 +8,39 @@
     <div class="title-img-name" >
         <!-- style="position: relative;" -->
         <ion-img class="title-img" src="{{selectedShed.image_url}}"></ion-img>
-        <ion-title class="shed-name">{{selectedShed.name}}</ion-title>
+        <ion-title class="shed-name" text-wrap>{{selectedShed.name}}</ion-title>
     </div>
 
-    <div padding>
-        <!-- <ion-badge item-end color="secondary">SUCCESS</ion-badge> -->
+    <div class="shed-details" padding>
         <ion-label >Address : </ion-label>
-        <ion-item no-lines>
-            <ion-label>{{selectedShed.address}}</ion-label>
+        <ion-item text-wrap>
+            <ion-label >{{selectedShed.address}}</ion-label>
         </ion-item>
-
-        <ion-label >Available Types : </ion-label>
+        <br>
+        <ion-label >Distance to Station : </ion-label>
+        <ion-item >
+            <ion-label>{{selectedShed.distance}} km</ion-label>
+        </ion-item>
+        <br>
+        <ion-label >Time to Station : </ion-label>
+        <ion-item >
+            <ion-label>{{selectedShed.duration}}</ion-label>
+        </ion-item>
+        <br>
+        <ion-label >Available Types :&nbsp;&nbsp; <ion-badge item-end color="primary">GAS YAY!</ion-badge></ion-label>
         <ion-item no-lines>
-            <ion-grid>
+            <ion-grid class="fuel-grid-head">
                 <ion-row>
                     <ion-col col-6>
                         Fuel Type
                     </ion-col>
                     <ion-col col-6>
-                        Available Amount
+                        Available Amount (L)
                     </ion-col>
                 </ion-row>
             </ion-grid>
 
-            <ion-grid *ngFor="let type of fuelTypes">
+            <ion-grid *ngFor="let type of fuelTypes" class="fuel-grid-data">
                 <ion-row>
                     <ion-col col-6>
                         {{type.name}}
@@ -42,14 +51,11 @@
                 </ion-row>
             </ion-grid>
         </ion-item>
-
-        <ion-label >Distance to Station : </ion-label>
-        <ion-item no-lines>
-            <ion-label>{{selectedShed.distance}} km</ion-label>
-        </ion-item>
-
-        <button outline ion-button large block round color="accentshade" (click)="getDirections()">
-            <ion-icon name="navigate"></ion-icon>&nbsp;&nbsp;Get Directions
-        </button>
+        <br>
+        <ion-fab class="fab-navigate" (click)="getDirections()">
+                <button color="accentshade" ion-fab="" class="fab fab-md fab-md-danger">
+                    <ion-icon name="navigate" role="img" class="icon icon-md ion-md-add"></ion-icon>
+                </button>
+            </ion-fab>
     </div>
 </ion-content>

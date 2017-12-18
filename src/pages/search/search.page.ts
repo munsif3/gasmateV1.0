@@ -17,6 +17,7 @@ export class SearchPage {
     public searchControl: FormControl;
     public searchBar: String = "";
     @ViewChild("search", { read: ElementRef }) public searchElementRef: ElementRef;
+    public userLocation: any;
 
     constructor (
         public navCtrl: NavController,
@@ -36,8 +37,6 @@ export class SearchPage {
                     let place: google.maps.places.PlaceResult = autocomplete.getPlace();
                     if ( place.geometry === undefined || place.geometry === null ) {
                         return;
-                    } else {
-                        console.log("Error Fetching Suggestions");
                     }
                 });
             });
@@ -51,6 +50,7 @@ export class SearchPage {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
+                this.userLocation = pos;
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode({ location: pos },  (results, status) => {
                     if (status == "OK") {
@@ -65,6 +65,7 @@ export class SearchPage {
 
     showResultsPage (fuelType, radius) {
         this.navCtrl.push(ResultsPage, {
+            userLocation: this.userLocation,
             fuelType: fuelType,
             radius: radius
         });

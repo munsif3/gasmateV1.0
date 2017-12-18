@@ -22,6 +22,7 @@ export class ResultsPage {
     });
 
     loader.present().then(() => {
+      let userLocation = this.navParams.get("userLocation");
       let fuelType = this.navParams.get("fuelType");
       let radius = this.navParams.get("radius");
       this.gasmateService.getStations().then(data => {
@@ -31,6 +32,7 @@ export class ResultsPage {
             for(var j in data[i].types){
               if(data[i].types[j].name === fuelType){
                 if (data[i].distance <= radius && data[i].types[j].amount > 10 ) {
+                  data[i]["userLocation"] = userLocation;
                   newArr.push(data[i]);
                 }
               }
@@ -46,6 +48,7 @@ export class ResultsPage {
   }
 
   shedSelected($event, shed) {
+    console.log("shed",shed)
     this.navCtrl.push(ShedPage, shed);
   }
   

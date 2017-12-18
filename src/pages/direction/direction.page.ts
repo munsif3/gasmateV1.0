@@ -1,8 +1,6 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 
-declare var window: any;
-
 @Component({
     selector: "direction",
     templateUrl: "direction.page.html"
@@ -43,7 +41,7 @@ export class DirectionPage {
         directionsDisplay.setPanel(this.directionsPanel.nativeElement);
 
         directionsService.route({
-                origin: "boc merchant tower",
+                origin: this.navParams.data.userLocation,
                 destination: this.stationLocation,
                 travelMode: google.maps.TravelMode["DRIVING"]
             }, (res, status) => {

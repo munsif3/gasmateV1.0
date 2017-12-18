@@ -26,17 +26,20 @@ export class ResultsPage {
       let radius = this.navParams.get("radius");
       this.gasmateService.getStations().then(data => {
         let newArr = [];
-        // if(fuelType != undefined){
-          console.log("data ",data)
+        if (fuelType != undefined) {          
           for (var i = 0; i < data.length; i++) {
-              // if (fuelType in data[i].types && data[i].distance <= radius) {
+            for(var j = 0; j < data[i].types.length; j++){
+              if(Object.values(data[i].types[j]).indexOf(fuelType) > -1){                
+                if (data[i].distance <= radius && data[i].types[j]["amount"] > 0 ) {
                   newArr.push(data[i]);
-              // }
+                }
+              }
+            }
           }
           this.sheds = newArr;
-        // } else {
-          // this.sheds = false;
-        // }
+        } else {
+          this.sheds = false;
+        }
         loader.dismiss();
       });
     });

@@ -14,17 +14,22 @@ ion-header.shed-nav {
     display: none;
 }
 
+.title-img-name {
+    position: relative;
+}
+
 .title-img {
     object-fit: cover;
     width: 370px;
-    height: 200px;
+    height: 230px;
 }
 
-.shed-name.toolbar-title-md {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-    color: #ffffff;
+.shed-name div {
+    // padding-right: 130px;
+    padding-bottom: 60px;
+    font-size: 4rem;
+    color: #ffff;
+    -webkit-text-stroke: 0.1px black;
 }
 
 // .types-title {

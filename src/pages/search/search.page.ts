@@ -13,13 +13,13 @@ declare var google: any;
     templateUrl: "search.page.html"
 })
 export class SearchPage {
-    public searchControl: FormControl;
-    searchbar: String;
 
+    public searchControl: FormControl;
+    public searchBar: String;
     @ViewChild("search", { read: ElementRef })
     public searchElementRef: ElementRef;
 
-    constructor(
+    constructor (
         public navCtrl: NavController,
         private ngZone: NgZone,
         private mapsAPILoader: MapsAPILoader,
@@ -27,9 +27,9 @@ export class SearchPage {
     ) { }
 
     ngOnInit() {
-        this.setCurrentPosition();
         this.searchControl = new FormControl();
         this.allowDynamicSearch();
+        this.setCurrentPosition();
     }
 
     setCurrentPosition() {
@@ -39,13 +39,15 @@ export class SearchPage {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
+                let willType = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ location: pos }, function(results, status) {
+                geocoder.geocode({ location: pos }, function (results, status) {
                     if (status == "OK") {
-                        this.searchbar = results[0].formatted_address;
-                        console.log("results", results[0].formatted_address);
+                        // willType.value = results[0].formatted_address;
+                        this.searchBar = results[0].formatted_address;
+                        console.log("Fetched Location", results[0].formatted_address);
                     } else {
-                        console.log("Error Fetching Location");
+                        console.log("Error Fetching User Location");
                     }
                 });
             });
@@ -59,18 +61,17 @@ export class SearchPage {
             autocomplete.addListener("place_changed", () => {
                 this.ngZone.run(() => {
                     let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                    console.log("place", place);
                     if ( place.geometry === undefined || place.geometry === null ) {
                         return;
                     } else {
-                        console.log("Error Fetching Suggestion");
+                        console.log("Error Fetching Suggestions");
                     }
                 });
             });
         });
     }
 
-    showResultsPage(fuelType, radius) {
+    showResultsPage (fuelType, radius) {
         this.navCtrl.push(ResultsPage, {
             fuelType: fuelType,
             radius: radius

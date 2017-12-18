@@ -5,19 +5,20 @@
 </ion-header>
 
 <ion-content>
-    <div style="position: relative;">
+    <div class="title-img-name" >
+        <!-- style="position: relative;" -->
         <ion-img class="title-img" src="{{selectedShed.image_url}}"></ion-img>
         <ion-title class="shed-name">{{selectedShed.name}}</ion-title>
     </div>
 
     <div padding>
         <!-- <ion-badge item-end color="secondary">SUCCESS</ion-badge> -->
-        <ion-label stacked>Address : </ion-label>
+        <ion-label >Address : </ion-label>
         <ion-item no-lines>
             <ion-label>{{selectedShed.address}}</ion-label>
         </ion-item>
 
-        <ion-label stacked>Available Types : </ion-label>
+        <ion-label >Available Types : </ion-label>
         <ion-item no-lines>
             <ion-grid>
                 <ion-row>
@@ -42,7 +43,7 @@
             </ion-grid>
         </ion-item>
 
-        <ion-label stacked>Distance to Station : </ion-label>
+        <ion-label >Distance to Station : </ion-label>
         <ion-item no-lines>
             <ion-label>{{selectedShed.distance}} km</ion-label>
         </ion-item>

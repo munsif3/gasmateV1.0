@@ -18,7 +18,7 @@ export class ResultsPage {
 
   ionViewDidLoad() {
     let loader = this.loadingContoller.create({
-      content: "Fetching the Stations..."
+      content: "Fetching the Sheds..."
     });
 
     loader.present().then(() => {
@@ -48,7 +48,6 @@ export class ResultsPage {
   }
 
   shedSelected($event, shed) {
-    console.log("shed",shed)
     this.navCtrl.push(ShedPage, shed);
   }
   

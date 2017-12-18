@@ -15,7 +15,6 @@ export class ShedPage {
                 public navParams: NavParams) {}
 
     ionViewDidLoad() {
-        console.log(this.navParams.data);
         this.selectedShed = this.navParams.data;
         this.fuelTypes = this.navParams.data.types;
         this.location = this.navParams.data.location;

@@ -28,9 +28,16 @@ export class ResultsPage {
         let newArr = [];
         if (fuelType != undefined) {          
           for (var i = 0; i < data.length; i++) {
-            for(var j = 0; j < data[i].types.length; j++){
-              if(Object.values(data[i].types[j]).indexOf(fuelType) > -1){                
-                if (data[i].distance <= radius && data[i].types[j]["amount"] > 0 ) {
+            // for(var j = 0; j < data[i].types.length; j++){
+            //   if(Object.values(data[i].types[j]).indexOf(fuelType) > -1){                
+            //     if (data[i].distance <= radius && data[i].types[j]["amount"] > 0 ) {
+            //       newArr.push(data[i]);
+            //     }
+            //   }
+            // }
+            for(const k in data[i].types){
+              if(data[i].types[k] === fuelType){
+                if (data[i].distance <= radius && data[i].types[k]["amount"] > 0 ) {
                   newArr.push(data[i]);
                 }
               }

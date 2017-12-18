@@ -15,7 +15,7 @@ declare var google: any;
 export class SearchPage {
 
     public searchControl: FormControl;
-    public searchBar: String;
+    public searchBar: String = "";
     @ViewChild("search", { read: ElementRef })
     public searchElementRef: ElementRef;
 
@@ -28,36 +28,12 @@ export class SearchPage {
 
     ngOnInit() {
         this.searchControl = new FormControl();
-        this.allowDynamicSearch();
+        // this.allowDynamicSearch();
         this.setCurrentPosition();
-    }
-
-    setCurrentPosition() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(position => {
-                let pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                let willType = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ location: pos }, function (results, status) {
-                    if (status == "OK") {
-                        // willType.value = results[0].formatted_address;
-                        this.searchBar = results[0].formatted_address;
-                        console.log("Fetched Location", results[0].formatted_address);
-                    } else {
-                        console.log("Error Fetching User Location");
-                    }
-                });
-            });
-        }
-    }
-
-    allowDynamicSearch() {
         this.mapsAPILoader.load().then(() => {
             let typedLocation = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
             let autocomplete = new google.maps.places.Autocomplete(typedLocation, { types: ["address"] });
+            
             autocomplete.addListener("place_changed", () => {
                 this.ngZone.run(() => {
                     let place: google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -69,6 +45,28 @@ export class SearchPage {
                 });
             });
         });
+    }
+
+    setCurrentPosition() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(position => {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                // let willType = this.searchElementRef.nativeElement.getElementsByTagName("input").search;
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ location: pos },  (results, status) => {
+                    if (status == "OK") {
+                        this.searchBar = results[0].formatted_address;
+                        // console.log("Fetched Location before:", results[0].formatted_address);
+                        // willType.value = results[0].formatted_address;
+                    } else {
+                        console.log("Error Fetching User Location");
+                    }
+                });
+            });
+        }
     }
 
     showResultsPage (fuelType, radius) {

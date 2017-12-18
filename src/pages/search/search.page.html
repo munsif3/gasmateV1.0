@@ -19,12 +19,11 @@
     </ion-fab>
     <br><br><br>
     <ion-list>
-        
         <ion-item padding-top padding-bottom >
             <!-- <ion-label floating>Type in your location</ion-label> -->
-            <ion-input placeholder="Type in your location" [(ngModel)]="searchBar" [value]="searchBar" name="search" type="text" autocorrect="off" autocapitalize="off" spellcheck="off" [formControl]="searchControl" #search ></ion-input>             
+            <ion-input placeholder="Type in your location" [(ngModel)]="searchBar" name="search" type="text" autocorrect="off" autocapitalize="off" spellcheck="off" [formControl]="searchControl" #search ></ion-input>             
         </ion-item>
-        <!-- [(ngModel)]="searchbar"   [value]="newVal" -->
+        
         <ion-item padding-bottom>
             <ion-label>Select the Fuel Type</ion-label>
             <ion-select interface="popover" [(ngModel)]="fuelType" name="fuelType" class="select select-md ng-pristine ng-valid ng-touched">

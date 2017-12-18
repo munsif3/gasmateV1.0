@@ -4,3 +4,14 @@
     opacity: 0;
     transition: opacity 150ms ease-in
 }
+
+ion-card {
+    max-height: 200px;
+    overflow: scroll;
+    position: absolute;
+    z-index: 1;
+}
+
+// .scroll {
+//     height: 100%
+// }

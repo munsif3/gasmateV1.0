@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content class="search-main-div" padding>
-
+    <ion-refresher (ionRefresh)="reloadPage()">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-fab right="">
         <button color="accentshade" ion-fab="" class="fab fab-md fab-md-danger" (click)="setCurrentPosition()">
             <ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img"></ion-icon>

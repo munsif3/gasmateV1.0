@@ -70,4 +70,10 @@ export class SearchPage {
             radius: radius
         });
     }
+
+    reloadPage(){
+        setTimeout(() => {
+            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        }, 1000);
+    }
 }

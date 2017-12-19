@@ -15,7 +15,7 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-list *ngIf="sheds">
+    <ion-list class="shed-card-list" *ngIf="sheds">
         <ion-card class="rescard" *ngFor="let shed of sheds" (click)="shedSelected($event, shed)">
             <ion-list>
                 <img class="resimg" [src]="shed.image_url" />

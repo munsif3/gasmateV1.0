@@ -11,17 +11,19 @@
     <ion-refresher (ionRefresh)="reloadPage()">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    
     <ion-fab right="">
-        <button color="accentshade" ion-fab="" class="fab fab-md fab-md-danger" (click)="setCurrentPosition()">
+        <button color="accentshade" ion-fab="" class="locate-fab" (click)="setCurrentPosition()">
             <ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img"></ion-icon>
             <span class="button-inner">
                 <ion-icon name="locate" role="img" class="icon icon-md ion-md-add"></ion-icon>
             </span>
         </button>
     </ion-fab>
-    <br><br><br>
-    <ion-list>
-        <ion-item padding-top padding-bottom >
+    
+    <ion-list class="search-list">
+
+        <ion-item style="border-bottom-color: none; -webkit-box-shadow: none; box-shadow: none;" padding-top padding-bottom >
             <ion-input placeholder="Type in your location" [(ngModel)]="searchBar" name="search" type="text" autocorrect="off" autocapitalize="off" spellcheck="off" [formControl]="searchControl" #search ></ion-input>             
         </ion-item>
         
@@ -46,9 +48,9 @@
 
     </ion-list>
 
-    <img class="" src="../assets/imgs/filler.png">
-    <br><br><br><br><br><br><br><br><br>
-    <button outline ion-button large block round color="accentshade" (click)="showResultsPage(fuelType, radius)">
+    <img class="shed-img" src="../assets/imgs/filler.png">
+
+    <button class="search-btn" outline color="accentshade" ion-button large block round (click)="showResultsPage(fuelType, radius)">
         SEARCH&nbsp;&nbsp;<ion-icon name="search"></ion-icon>
     </button>
 

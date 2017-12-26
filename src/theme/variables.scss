@@ -22,8 +22,14 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-
-
+// @font-face {
+//   font-family: "Maven Pro";
+//   font-style: normal;
+//   font-weight: 700;
+//   src: local("Maven Pro Bold"), local("Maven-Pro-Bold"), url("#{$font-path}/MavenPro-Bold.ttf") format("truetype");
+// }
+// $font-family-base: 'Helvetica Neue';
+// $font-family-md-base: "Segoe UI";
 
 // Named Color Variables
 // --------------------------------------------------
